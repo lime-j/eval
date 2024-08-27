@@ -39,7 +39,7 @@ method_dict = {
     'IMGS_LLFlow' : 'LLFlow'
 }
 
-method_file_dict = {
+method_text_dict = {
     'IMGS_Bread': 'png',
     'IMGS_iat': 'jpg',
     'retinexformer_png': 'png',
@@ -78,7 +78,7 @@ def compare_images(image1, image2):
 
 def is_chinese_browser(request):
     accept_language = request.headers.get('Accept-Language', '')
-    return 'zh' in accept_language.lower()
+    return ('zh' in accept_language.lower()) or ('zh-cn' in accept_language.lower())
 
 with gr.Blocks() as block_demo:
     
@@ -113,9 +113,10 @@ with gr.Blocks() as block_demo:
     def get_localized_text(text_en, text_zh, is_chinese):
         return text_zh if is_chinese else text_en
 
-    is_chinese_state = gr.State(False)
+    img1, img2, prop_text, image_state, method1_state, method2_state, property_state, img_input, ip_state, is_chinese_state = gr.State(), gr.State(), gr.State(), gr.State(), gr.State(), gr.State(), gr.State(), gr.State(), gr.State(), gr.State(False)
+    # is_chinese_state = gr.State(False)
     block_demo.load(on_load, inputs=[], outputs=[
-        'image', 'image', 'markdown', 'state', 'state', 'state', 'state', 'image', 'state', is_chinese_state
+        img1, img2, prop_text, image_state, method1_state, method2_state, property_state, img_input, ip_state, is_chinese_state
     ])
 
     def render_interface(is_chinese):
@@ -185,7 +186,7 @@ with gr.Blocks() as block_demo:
     both_good = gr.Button()
     both_bad = gr.Button()
     refresh_butt = gr.Button()
-    image_state, method1_state, method2_state, property_state, ip_state = gr.State(), gr.State(), gr.State(), gr.State(), gr.State()
+    # image_state, method1_state, method2_state, property_state, ip_state = gr.State(), gr.State(), gr.State(), gr.State(), gr.State()
 
     l_butt.click(fn=update_interface, inputs=[method1_state, image_state, method1_state, method2_state, property_state, ip_state], outputs=[l_butt, r_butt, both_good, both_bad, refresh_butt])
     r_butt.click(fn=update_interface, inputs=[method2_state, image_state, method1_state, method2_state, property_state, ip_state], outputs=[l_butt, r_butt, both_good, both_bad,  refresh_butt])
