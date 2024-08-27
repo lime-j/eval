@@ -6,10 +6,10 @@ from db import send_message_to_mongodb
 all_property = ['artifact', 'color', 'lightness', 'blury', 'overall']
 property_dict = {
     'artifact': '有更少的伪影或噪点',
-    'color': '有更悦目的颜色',
-    'lightness': '照明良好',
-    'blury': '有清晰和明确的纹理',
-    'overall': '视觉上更令人愉悦'
+    'color': '颜色更赏心悦目',
+    'lightness': '光照调节得当',
+    'blury': '有清晰的纹理',
+    'overall': '视觉上更好看'
 }
 methods = ['IMGS_Bread', 'IMGS_iat', 'retinexformer_png', 'images', 'IMGS_Kind', 
            'IMGS_ZeroDCE', 'IMGS_nerco', 'IMGS_quadprior', 'IMGS_LIME', 'IMGS_pairlie', 'IMGS_LD']
@@ -95,16 +95,16 @@ with gr.Blocks() as block_demo:
         image, method1, method2, image1, image2, property, image_input = refresh_comparison()
         return image1, image2, f"<h2 style='font-size: 24px;'>哪一个{property_dict[property]}？</h2>",\
           image, method1, method2, property, image_input, request_state
-    gr.Markdown("<h2 align='center',style='font-size: 24px;'>低光照图像增强竞技场 🥊</h2>")
-    gr.Markdown("<p align='center', style='font-size: 18px;'>这是一个简单的竞技场，用于测试不同低光照图像增强器的性能。</p>")
-    gr.Markdown("<p align='center', style='font-size: 18px;'>请帮助我们找出更好的图像！</p>")
+    gr.Markdown("<h2 align='left',style='font-size: 24px;'>低光照图像增强擂台</h2>")
+    gr.Markdown("<p align='left', style='font-size: 18px;'>我们希望通过我们精心准备的一系列暗光图像，测试不同低光照图像增强器的性能。</p>")
+    gr.Markdown("<p align='left', style='font-size: 18px;'>请帮助我们找出更好的图像。</p>")
     with gr.Row():
         with gr.Column():
             gr.Markdown("<p style='font-size: 16px;'>常见问题：</p>")
             gr.Markdown("<ul style='font-size: 14px;'>"
-                        f"<li><strong>伪影/噪点：</strong> - 图像中可能存在意外的改变。</li>"
-                        f"<li><strong>不自然的颜色：</strong> - 从低光照输入恢复的颜色可能不自然。</li>"
-                        f"<li><strong>照明不佳：</strong> - 图像的亮度不令人满意，可能太暗或太亮。</li>"
+                        f"<li><strong>伪影/噪点：</strong> - 经过增强器处理的图像可能出现未被抑制的噪声或新增添的伪影。</li>"
+                        f"<li><strong>不自然的颜色：</strong> - 低光照图像颜色会发生偏移，增强器有时无法将图像校正成合适的颜色。</li>"
+                        f"<li><strong>照明不佳：</strong> - 增强算法调整的程度不合适，导致过暗或过亮。</li>"
                         f"<li><strong>模糊/过度平滑：</strong> - 图像的纹理不清晰，可能是由于过度去噪造成的。</li>"
                         "</ul>")
             gr.Image('./cat.png', label='示例')
@@ -115,7 +115,7 @@ with gr.Blocks() as block_demo:
         img1 = gr.Image(label="图像 1")
         img2 = gr.Image(label="图像 2")
     
-    prop_text = gr.Markdown(f'###在x方面哪一个更好？')
+    prop_text = gr.Markdown(f'###哪一个更好？')
     image_state, method1_state, method2_state, property_state, ip_state = gr.State(), gr.State(), gr.State(), gr.State(), gr.State()
     block_demo.load(on_load, inputs=[], outputs=[img1, img2, prop_text, 
                                                    image_state, method1_state, method2_state, property_state, img_input, ip_state])
