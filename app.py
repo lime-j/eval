@@ -107,7 +107,7 @@ with gr.Blocks() as block_demo:
                         f"<li><strong>照明不佳：</strong> - 增强算法调整的程度不合适，导致过暗或过亮。</li>"
                         f"<li><strong>模糊/过度平滑：</strong> - 图像的纹理不清晰，可能是由于过度去噪造成的。</li>"
                         "</ul>")
-            gr.Image('./cat.png', label='示例')
+            gr.Image('./cat_zh.png', label='示例')
         img_input = gr.Image(label="输入图像")
  
 
