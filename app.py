@@ -39,7 +39,7 @@ method_dict = {
     'IMGS_LLFlow' : 'LLFlow'
 }
 
-method_dict = {
+method_file_dict = {
     'IMGS_Bread': 'png',
     'IMGS_iat': 'jpg',
     'retinexformer_png': 'png',
