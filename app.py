@@ -85,16 +85,19 @@ with gr.Blocks() as block_demo:
 
     def refresh_comparison():
         return  get_random_comparison()
+    def prepare_everything_else():
+        image, method1, method2, image1, image2, property, image_input = refresh_comparison()
+        return image1, image2, f"<h2 style='font-size: 24px;'>哪一个更<mark class='red'>{property_dict[property]}</mark>?</h2>",\
+          image, method1, method2, property, image_input
     def on_load(request: gr.Request):
+
         headers = request.headers
         host = request.client.host
         request_state = dict(headers)
         request_state['host'] = host
-        # print(str(request))
-        print(request_state)
-        image, method1, method2, image1, image2, property, image_input = refresh_comparison()
-        return image1, image2, f"<h2 style='font-size: 24px;'>哪一个<mark class='red'>{property_dict[property]}</mark>？</h2>",\
-          image, method1, method2, property, image_input, request_state
+
+        return *prepare_everything_else(), request_state
+        
     gr.Markdown("<h2 align='left',style='font-size: 24px;'>低光照图像增强擂台</h2>")
     gr.Markdown("<p align='left', style='font-size: 18px;'>我们希望通过我们精心准备的一系列暗光图像，测试不同低光照图像增强器的性能。</p>")
     gr.Markdown("<p align='left', style='font-size: 18px;'>请帮助我们找出更好的图像。</p>")
@@ -134,27 +137,20 @@ with gr.Blocks() as block_demo:
         # if type(choice) is not str : choice = choice.value
         print(choice, image, method1, method2, property, ip)
         send_message_to_mongodb(image, property, method1, method2, choice, ip)
+        img1, img2, prop_text, image_state, method1_state, method2_state, property_state, img_input = prepare_everything_else()
         # new_image, new_method1, new_method2, new_image1, new_image2, new_property = get_random_comparison()
         return [
-            # gr.Markdown("### 感谢您的提交！"),
-            gr.Button(interactive=False),
-            gr.Button(interactive=False),
-            gr.Button(interactive=False),
-            gr.Button(interactive=False),
-            # gr.Markdown(f'左图: {method_dict[method1]}'),
-            # gr.Markdown(f'右图: {method_dict[method2]}'),
-            gr.Button(visible=True, interactive=True),
-            # gr.Image(new_image1), 
-            # gr.Image(new_image2),
-            # f'### 提交您对**{new_property}**的选择'
+            img1, img2, prop_text, image_state, method1_state, method2_state, property_state, img_input, ip
         ]
 
-    l_butt.click(fn=update_interface, inputs=[method1_state, image_state, method1_state, method2_state, property_state, ip_state], outputs=[l_butt, r_butt, both_good, both_bad, refresh_butt])
-    r_butt.click(fn=update_interface, inputs=[method2_state, image_state, method1_state, method2_state, property_state, ip_state], outputs=[l_butt, r_butt, both_good, both_bad,  refresh_butt])
-    both_good.click(fn=update_interface, inputs=[gr.State('both_good'), image_state, method1_state, method2_state, property_state, ip_state], outputs=[l_butt, r_butt, both_good, both_bad, refresh_butt])
-    both_bad.click(fn=update_interface, inputs=[gr.State('both_bad'), image_state, method1_state, method2_state, property_state, ip_state], outputs=[l_butt, r_butt, both_good, both_bad, refresh_butt])
-
-
+    l_butt.click(fn=update_interface, inputs=[method1_state, image_state, method1_state, method2_state, property_state, ip_state], 
+                 outputs=[img1, img2, prop_text, image_state, method1_state, method2_state, property_state, img_input, ip_state])
+    r_butt.click(fn=update_interface, inputs=[method2_state, image_state, method1_state, method2_state, property_state, ip_state], 
+                 outputs=[img1, img2, prop_text, image_state, method1_state, method2_state, property_state, img_input, ip_state])
+    both_good.click(fn=update_interface, inputs=[gr.State('both_good'), image_state, method1_state, method2_state, property_state, ip_state], 
+                    outputs=[img1, img2, prop_text, image_state, method1_state, method2_state, property_state, img_input, ip_state])
+    both_bad.click(fn=update_interface, inputs=[gr.State('both_bad'), image_state, method1_state, method2_state, property_state, ip_state], 
+                   outputs=[img1, img2, prop_text, image_state, method1_state, method2_state, property_state, img_input, ip_state])
     refresh_butt.click(None, js="window.location.reload()")
 
 block_demo.launch()
