@@ -93,7 +93,7 @@ with gr.Blocks() as block_demo:
         # print(str(request))
         print(request_state)
         image, method1, method2, image1, image2, property, image_input = refresh_comparison()
-        return image1, image2, f"<h2 style='font-size: 24px;'>哪一个{property_dict[property]}？</h2>",\
+        return image1, image2, f"<h2 style='font-size: 24px;'>哪一个<mark class='red'>{property_dict[property]}</mark>？</h2>",\
           image, method1, method2, property, image_input, request_state
     gr.Markdown("<h2 align='left',style='font-size: 24px;'>低光照图像增强擂台</h2>")
     gr.Markdown("<p align='left', style='font-size: 18px;'>我们希望通过我们精心准备的一系列暗光图像，测试不同低光照图像增强器的性能。</p>")
