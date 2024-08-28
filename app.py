@@ -7,8 +7,8 @@ all_property = ['artifact', 'color', 'lightness', 'blury', 'overall']
 property_dict = {
     'artifact': '有更少的伪影或噪点',
     'color': '颜色更赏心悦目',
-    'lightness': '光照调节得当',
-    'blury': '有清晰的纹理',
+    'lightness': '光照调节最得当',
+    'blury': '纹理最清晰',
     'overall': '视觉上更好看'
 }
 methods = ['IMGS_Bread', 'IMGS_iat', 'retinexformer_png', 'images', 'IMGS_Kind', 
@@ -120,11 +120,11 @@ with gr.Blocks() as block_demo:
     block_demo.load(on_load, inputs=[], outputs=[img1, img2, prop_text, 
                                                    image_state, method1_state, method2_state, property_state, img_input, ip_state])
     with gr.Row():
-        l_butt = gr.Button("左边的")
-        r_butt = gr.Button("右边的")
+        l_butt = gr.Button("图像 1")
+        r_butt = gr.Button("图像 2")
     with gr.Row():
-        both_good = gr.Button("两者都好")
-        both_bad = gr.Button("两者都不好")
+        both_good = gr.Button("两者都做的很好")
+        both_bad = gr.Button("两者都做的很糟糕")
 
     result = gr.Markdown("")
     # l_note, r_note = gr.Markdown(""), gr.Markdown("")
