@@ -12,7 +12,8 @@ property_dict = {
     'overall': '视觉上更好看'
 }
 methods = ['IMGS_Bread', 'IMGS_iat', 'retinexformer_png', 'images', 'IMGS_Kind', 
-           'IMGS_ZeroDCE', 'IMGS_nerco', 'IMGS_quadprior', 'IMGS_LIME', 'IMGS_pairlie', 'IMGS_LD']
+           'IMGS_ZeroDCE', 'IMGS_nerco', 'IMGS_quadprior', 'IMGS_LIME', 'IMGS_pairlie', 
+           'IMGS_LD', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff'] # add 4x prob for new methods
 method_dict = {
     'IMGS_Bread': 'Bread',
     'IMGS_iat': 'IAT',
@@ -27,7 +28,7 @@ method_dict = {
     'IMGS_LD' : 'LightenDiffusion',
     'IMGS_SCI' : 'SCI',
     'IMGS_pydiff' : 'PyDiff',
-    'IMGS_LLFlow' : 'LLFlow'
+    'IMGS_llflow' : 'LLFlow'
 
 }
 
