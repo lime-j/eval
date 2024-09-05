@@ -13,7 +13,7 @@ property_dict = {
 }
 methods = ['IMGS_Bread', 'IMGS_iat', 'retinexformer_png', 'images', 'IMGS_Kind', 
            'IMGS_ZeroDCE', 'IMGS_nerco', 'IMGS_quadprior', 'IMGS_LIME', 'IMGS_pairlie', 
-           'IMGS_LD', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff'] # add 4x prob for new methods
+           'IMGS_LD', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_llflow', 'IMGS_sci', 'IMGS_pydiff', 'IMGS_snr', 'IMGS_snr', 'IMGS_snr', 'IMGS_snr'] # add 4x prob for new methods
 method_dict = {
     'IMGS_Bread': 'Bread',
     'IMGS_iat': 'IAT',
