@@ -76,7 +76,9 @@ with gr.Blocks() as block_demo:
         print(time.time())
         random.seed(time.time())
         image = random.choice(image_list)
-        method1, method2 = random.sample(methods, 2)
+        method1, method2 = '', ''
+        while method1 == method2:
+            method1, method2 = random.sample(methods, 2)
         # method1_suffix, method2_suffix = 
         image1 = bucket + '/' + method1 + '/' + image
         image2 = bucket + '/' + method2 + '/' + image
